@@ -41,7 +41,7 @@ pip install PyMySQL
 1. 确保已经创建了数据库TEST
 2. 确保已经在数据库TEST中已经创建了表STUDENT
 3. 确保连接数据库的密码和数据库名称，以及端口和数据库的IP地址
-4. 确认以及安装了PyMySQL模块了
+4. 确认已经安装PyMySQL模块
 
 ###### 测试例子
 

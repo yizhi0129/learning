@@ -65,7 +65,7 @@ score float
 );
 -- 给表TbSC添加外键约束
 alter table TbSC add constraint fk_sid foreign key (sid) references TbStudent (stuid) on delete cascade on update cascade;
-alter table TbSC add constraint fk_cid foreign key (cid) references TBCourse (cosid) on delete set null on update cascade;
+alter table TbSC add constraint fk_cid foreign key (cid) references TbCourse (cosid) on delete set null on update cascade;
 -- 添加学生记录
 insert into TbStudent values (1001, '张三丰', default, '1978-1-1', '成都市一环路西二段17号', null);
 insert into TbStudent (stuid, stuname, stubirth) values (1002, '郭靖', '1980-2-2');
@@ -77,7 +77,7 @@ insert into TbStudent values
 (1007, '刘处玄', 1, '1987-7-7', '郑州市金水区纬五路21号', null),
 (1008, '孙不二', 0, '1989-8-8', '武汉市光谷大道61号', null),
 (1009, '平一指', 1, '1992-9-9', '西安市雁塔区高新六路52号', null),
-(1010, '老不死', 1, '1993-10-10', '广州市天河区元岗路310号', null);
+(1010, '老不死', 1, '1993-10-10', '广州市天河区元岗路310号', null),
 (1011, '王大锤', 0, '1994-11-11', null, null),
 (1012, '隔壁老王', 1, '1995-12-12', null, null),
 (1013, '郭啸天', 1, '1977-10-25', null, null);
@@ -153,7 +153,6 @@ insert into TbSC values
 
    19) 查询平均成绩大于等于90分的学生的学号和平均成绩
 
-
    20) 查询年龄最大的学生的姓名(子查询)
 
    21) 查询选了两门以上的课程的学生姓名(子查询/分组条件/集合运算)
@@ -202,9 +201,9 @@ insert into TbSC values
    17) select sum(score) as `总成绩` from TbSC where sid=1001;
 
    18) select sid as `学号`, ifnull(avg(score), 0) as `平均成绩` from TbSC group by sid;
+      // select sid as `学号`, avg(ifnull(score, 0)) as `平均成绩` from TbSC group by sid;
 
    19) select sid as `学号`, avg(score) as `平均成绩` from TbSC group by sid having avg(score)>=90;
-
 
    20) select stuname from TbStudent where stubirth=(select min(stubirth) from TbStudent);
 
@@ -218,8 +217,6 @@ insert into TbSC values
       写法1:select stuname, cosname, score from  TbStudent t1, TbCourse t2, TbSC t3 where t1.stuid=t3.sid and t2.cosid=t3.cid and t3.score is not null;
       写法2: select stuname, cosname, score from TbStudent t1 inner join TbCourse t2 inner join (select sid, cid, score from TbSC where score is not null) t3 on t1.stuid=t3.sid and t2.cosid=t3.cid;
    
-   24) select stuname as `姓名`, ifnull(coscount, 0) as `选课数` from TbStudent t1
-left outer join (select sid, count(sid) as coscount from TbSC group by sid) t2 
-on t1.stuid=t2.sid;
+   24) select stuname as `姓名`, ifnull(coscount, 0) as `选课数` from TbStudent t1 left outer join (select sid, count(sid) as coscount from TbSC group by sid) t2 on t1.stuid=t2.sid;
 
 

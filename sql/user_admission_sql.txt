@@ -1,0 +1,6 @@
+#bash
+sudo mysql -u root -p
+
+mysql>
+GRANT ALL PRIVILEGES ON base_name.* TO 'user_name'@'localhost';
+FLUSH PRIVILEGES;

@@ -403,7 +403,7 @@ select distinct s_yuwen from TbStudent;
 
 关键词：if(字段,exp1,exp2) 或者 ifnull(字段,exp1,,exp2)
 作用：if表达式中如果字段值为真则返回exp1的值，如果为假的话，返回exp2的值
-     ifnull表达式中如果字段的值为假则返回exp1的值，如果为假的话，返回exp2的值
+     ifnull表达式中如果字段的值为假则返回exp1的值，如果为真的话，返回exp2的值
 
 例如： 查询男女学生的人数(分组和聚合函数)
 ```
