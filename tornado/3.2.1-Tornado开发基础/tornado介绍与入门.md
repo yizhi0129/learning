@@ -95,7 +95,7 @@ import tornado.ioloop
 
 <b> 3）make_app()方法</b>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回一个Tornado的Application类的实例，传递给Application类的__init__方法中的最重要的参数就是handlers，该参数表示告知Tornado应用应该调用那个类来处理响应。比如本例子中想调用MainHandler中的get方法，则应该访问http://127.0.0.1:8888/hello地址。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回一个Tornado的Application类的实例，传递给Application类的__init__方法中的最重要的参数就是handlers，该参数表示告知Tornado应用应该调用哪个类来处理响应。比如本例子中想调用MainHandler中的get方法，则应该访问 http://127.0.0.1:8888/hello 地址。
 
 <b> 4) app.listen(8888)</b>
 
@@ -118,7 +118,7 @@ return server
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于创建一个Tornado的IOLoop的实例，并一直运行Tornado项目，用于接收处理客户端的访问请求。
 
-在虚拟环境tornadoenv中运行FirstTornado.py文件，然后在浏览器中访问http://127.0.0.1:8888/hello地址或者http://公网ip地址:8888/hello地址
+在虚拟环境tornadoenv中运行FirstTornado.py文件，然后在浏览器中访问 http://127.0.0.1:8888/hello 地址或者http://公网ip地址:8888/hello 地址
 
 ### 4. 修改启动方式，使用命令行参数启动服务
 
@@ -197,8 +197,12 @@ class MainHandler(tornado.web.RequestHandler):
 	def get(self):
 		self.write("Hello, world")
 
+def make_app():
+    return tornado.web.Application(handlers=[
+        (r"/hello", MainHandler),
+    ])
+	
 if __name__ == "__main__":
-
 	# 解析命令行
 	parse_command_line()
 	# 获取Application对象
@@ -218,7 +222,7 @@ if __name__ == "__main__":
 - 如果num_processes参数为None或者<=0,则表示自动根据机器硬件的cpu核数创建同等数目的子进程。
 - 如果num_processes参数>0，则创建num_processes个子进程。
 
-因此在windows中num_processes一般不写或者写1。ss
+因此在windows中num_processes一般不写或者写1。
 
 ### 6. 取消日志打印
 

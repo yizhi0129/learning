@@ -23,7 +23,7 @@ Tornado框架是基于正则的动态路由映射，动态路由的定义方式�
 
 <b> 1) 指定带参数的动态路由 </b>
 
-    新增带参数的动态路由，并使用正则匹配规则‘(?P<参数名>)’来设置接收参数的名称。
+新增带参数的动态路由，并使用正则匹配规则‘(?P<参数名>)’来设置接收参数的名称。
 
 	class IndexHandler(tornado.web.RequestHandler):
 	    def get(self, month, year):
@@ -39,7 +39,7 @@ Tornado框架是基于正则的动态路由映射，动态路由的定义方式�
 
 <b> 2）不指定参数名的动态路由 </b>
 
-	定义接收参数的动态路由。
+定义接收参数的动态路由。
 	class NewIndexHandler(tornado.web.RequestHandler):
 	    def get(self, a, b, c):
 	        self.write('%s %s %s' % (a, b, c))
@@ -65,7 +65,7 @@ Tornado框架是基于正则的动态路由映射，动态路由的定义方式�
 
 如下定义匹配根路径“/”的路由，并调用请求处理MainHandler类中与HTTP请求方式对应的get()方法来响应这个请求。
 
-	定义不带参数的动态路由。
+定义不带参数的动态路由。
 	class MainHandler(tornado.web.RequestHandler):
 	    def get(self):
 	        self.write("Hello, world")
@@ -95,27 +95,28 @@ Tornado框架是基于正则的动态路由映射，动态路由的定义方式�
 7）RequestHandler.options(*args, **kwargs)
 
 【示例11-8】定义继承RequestHandler的子类的HTTP请求的行为方法。
-class MainHandler(tornado.web.RequestHandler):
-    def get(self, *args, **kwargs):
-        self.write("处理get请求")
 
-    def post(self, *args, **kwargs):
-        self.write("处理post请求")
+	class MainHandler(tornado.web.RequestHandler):
+    	def get(self, *args, **kwargs):
+        	self.write("处理get请求")
 
-    def patch(self, *args, **kwargs):
-        self.write("处理patch请求")
+    	def post(self, *args, **kwargs):
+        	self.write("处理post请求")
 
-    def put(self, *args, **kwargs):
-        self.write("处理put请求")
+    	def patch(self, *args, **kwargs):
+        	self.write("处理patch请求")
 
-    def head(self, *args, **kwargs):
-        self.write("处理head请求")
+    	def put(self, *args, **kwargs):
+        	self.write("处理put请求")
 
-    def options(self, *args, **kwargs):
-        self.write("处理options请求")
+    	def head(self, *args, **kwargs):
+        	self.write("处理head请求")
 
-    def delete(self, *args, **kwargs):
-        self.write("处理delete请求")
+    	def options(self, *args, **kwargs):
+        	self.write("处理options请求")
+
+    	def delete(self, *args, **kwargs):
+        	self.write("处理delete请求")
 
 ### 3. 切入点函数
 

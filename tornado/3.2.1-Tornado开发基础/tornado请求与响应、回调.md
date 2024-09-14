@@ -15,7 +15,8 @@
 
 参数的传递，可以在动态路由的配置时，通过定义带参URL形式传递参数。除此之外，如果不在URL配置时传递参数，还可以通过<b style="color:red;">get_argument()</b>方法获取参数值。
 
-请求URL地址为: http://location:8888/hello?name=xiaoming&age=18，则获取请求中的参数，采用以下语法格式:
+请求URL地址为: http://location:8888/hello?name=xiaoming&age=18
+则获取请求中的参数，采用以下语法格式:
 
 <b> 1）get_argument(name, default, strip=True) </b>
 
@@ -36,21 +37,18 @@
 	
 	# 定义默认的端口
 	define('port', default=8000, type=int)
-	
-	
+		
 	class MainHandler(tornado.web.RequestHandler):
 	    def get(self, *args, **kwargs):
 	        # 获取请求URL中传递的name参数
 	        name = self.get_argument('name', '小明')
 	        self.write("Hello, %s" % name)
-	
-	
+		
 	def make_app():
 	    return tornado.web.Application(handlers=[
 	        (r"/hello", MainHandler),
 	    ])
-	
-	
+		
 	if __name__ == "__main__":
 	    parse_command_line()
 	    app = make_app()
@@ -61,9 +59,11 @@
 
 1) self.get_argument(‘name’, default)方法用于获取请求URL中传递的参数，如果获取不到URL中传递的name参数，则返回默认值。
 
-2) 如果访问地址为http://127.0.0.1:8000/hello，使用self.get_argument(‘name’, default)方法获取不到请求URL中的name参数，则返回default默认值。
+2) 如果访问地址为http://127.0.0.1:8000/hello
+使用self.get_argument(‘name’, default)方法获取不到请求URL中的name参数，则返回default默认值。
 
-3) 如果访问地址为http://127.0.0.1:8000/hello?name=小王，则使用self.get_argument(‘name’, default)方法获取请求URL中的name参数，则返回值为‘小王’
+3) 如果访问地址为http://127.0.0.1:8000/hello?name=小王
+则使用self.get_argument(‘name’, default)方法获取请求URL中的name参数，则返回值为‘小王’
 
 <b style="color:red;">注意: </b>使用get_argument()和get_arguments()方法获取的是提交GET请求时URL中传递的参数和POST请求提交参数的集合。
 
@@ -76,7 +76,6 @@
 2) get_query_arguments(name): 和get_arguments语法相似，也是只能仅从URL中获取传递的参数，返回的结果是列表。
 
 3) get_body_argument(name): 和get_argument语法相似，但仅只能从POST请求中获取提交的参数。
-
 
 4) get_body_arguments(name): 和get_arguments语法相似，也是只能从POST请求中获取提交的参数，返回的结果是列表。
 
@@ -153,27 +152,23 @@
 	
 	# 定义默认的端口
 	define('port', default=8000, type=int)
-	
-	
+		
 	class HelloHandler(tornado.web.RequestHandler):
 	    def get(self, *args, **kwargs):
 	        self.write("hello tornado")
 	        self.write('<br/>')
 	        self.write("实现从路由'/redirect/'跳转到本方法中")
-	
-	
+		
 	class RedirectHandler(tornado.web.RequestHandler):
 	    def get(self, *args, **kwargs):
 	        # 使用redirect方法，跳转到根路径"/"地址
 	        self.redirect('/')
-	
-	
+		
 	def make_app():
 	    return tornado.web.Application(handlers=[
 	        (r"/redirect/", RedirectHandler),
 	        (r"/", HelloHandler),
-	    ])
-	
+	    ])	
 	
 	if __name__ == "__main__":
 	    parse_command_line()
@@ -181,7 +176,7 @@
 	    app.listen(options.port)
 	    tornado.ioloop.IOLoop.current().start()
 
-当在浏览器中访问http://127.0.0.1:8000/redirect/地址时，实现分析如下:
+当在浏览器中访问http://127.0.0.1:8000/redirect/ 地址时，实现分析如下:
 
 路由匹配规则会自动匹配URL路由表，并调用处理器RedirectHandler中的HTTP行为方法get()，在该方法中进行跳转处理，使用redirect(url)方法进行跳转到url地址。在HelloHandler的get()方法中使用self.write()向缓存中写入数据，当函数结束后才将缓存中的数据渲染到页面中。
 
